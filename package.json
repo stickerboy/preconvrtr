@@ -89,7 +89,7 @@
     "convert periodic elements",
     "convert periodic element properties"
   ],
-  "ga": "G-7P9LT5PVBK",
+  "ga": "G-7M7RHSM124",
   "dependencies": {
     "@11ty/eleventy": "^3.1.0",
     "bootstrap-scss": "^5.3.3",
