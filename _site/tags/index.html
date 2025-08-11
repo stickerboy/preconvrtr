@@ -1,13 +1,75 @@
 <!doctype html>
 <html lang="en" class="overflow-y-hidden">
     <head>
+        <script type="text/javascript" src="//www.termsfeed.com/public/cookie-consent/4.2.0/cookie-consent.js"
+    charset="UTF-8"></script>
+<script type="text/javascript" charset="UTF-8">
+    document.addEventListener('DOMContentLoaded', function () {
+        let siteTheme = document.documentElement.getAttribute("data-bs-theme");
+        if (siteTheme === "dark") {
+            cookieconsent.run({ "notice_banner_type": "headline", "consent_type": "express", "palette": "dark",  "language": "en", "page_load_consent_levels": ["strictly-necessary"], "notice_banner_reject_button_hide": false, "preferences_center_close_button_hide": false, "page_refresh_confirmation_buttons": false, "website_name": "Convrtr", "website_privacy_policy_url": "https://www.convrtr.xyz/privacy", "page_load_consent_levels": ["strictly-necessary"], "notice_banner_purposes_levels": ["strictly-necessary", "functionality", "tracking"],  "callbacks": {
+                    "scripts_specific_loaded": (level) => {
+                        switch (level) {
+                            case 'tracking':
+                                gtag('consent', 'update', {
+                                    'analytics_storage': 'granted'
+                                });
+                                break;
+                            case 'targeting':
+                                gtag('consent', 'update', {
+                                    'ad_storage': 'granted',
+                                    'ad_user_data': 'granted',
+                                    'ad_personalization': 'granted'
+                                });
+                                break;
+                        }
+                    }
+                },
+                "callbacks_force": true });
+
+        } else {
+            cookieconsent.run({ "notice_banner_type": "headline", "consent_type": "express", "palette": "light", "language": "en", "page_load_consent_levels": ["strictly-necessary"], "notice_banner_reject_button_hide": false, "preferences_center_close_button_hide": false, "page_refresh_confirmation_buttons": false, "website_name": "Convrtr", "website_privacy_policy_url": "https://www.convrtr.xyz/privacy",  "page_load_consent_levels": ["strictly-necessary"], "notice_banner_purposes_levels": ["strictly-necessary", "functionality", "tracking"], "callbacks": {
+                    "scripts_specific_loaded": (level) => {
+                        switch (level) {
+                            case 'tracking':
+                                gtag('consent', 'update', {
+                                    'analytics_storage': 'granted'
+                                });
+                                break;
+                            case 'targeting':
+                                gtag('consent', 'update', {
+                                    'ad_storage': 'granted',
+                                    'ad_user_data': 'granted',
+                                    'ad_personalization': 'granted'
+                                });
+                                break;
+                        }
+                    }
+                },
+                "callbacks_force": true
+             });
+        }
+    });
+</script>
         <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7M7RHSM124"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied'
+    });
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7M7RHSM124"  data-cookie-consent="tracking"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
 
+    gtag('js', new Date());
     gtag('config', 'G-7M7RHSM124');
 </script>
         <meta charset="utf-8">
@@ -559,6 +621,22 @@
         
     </div>
     
+    <div class="sidebar-item d-grid gap-2" data-link-id="privacy"
+        data-page-id="tags">
+        
+        <a class="btn btn-md sidebar-item__link text-start p-1 border border-success
+         border-opacity-10" aria-label="View the Privacy policy"
+            href="/privacy" data-href="/privacy">
+            <span class="sidebar-item__icon ms-2 me-1 fs-5 position-relative" style="left:4px;">
+                <i class="bi bi-shield-check" aria-hidden="true" focusable="false"></i>
+            </span>
+            <span class="sidebar-item__label fs-6 ms-3">
+                <span class="visually-hidden">View the </span>Privacy policy
+            </span>
+        </a>
+        
+    </div>
+    
 </div>
 </nav>
                 </div>
@@ -866,7 +944,7 @@
                                         title="Changelog items tagged with new-features">
                                         new-features
                                     </a>
-                                    (34)
+                                    (35)
                                 </div>
                     
                             </div>
@@ -962,7 +1040,7 @@
                                         title="Changelog items tagged with bug-fixes">
                                         bug-fixes
                                     </a>
-                                    (39)
+                                    (40)
                                 </div>
                     
                             </div>
@@ -1032,6 +1110,54 @@
                                 </div>
                                 <div class="col">
                                     Security/vulnerability/CVE related updates
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                <tr class="position-relative">
+                        <th scope="row">
+                            <div class="row">
+                                <div class="col-3 col-sm-2 d-md-none">
+                                    <span class="fs-6 fw-medium">Tag</span>
+                                </div>
+                                <div class="col">
+                                    <span class="badge git-badge badge-privacy">privacy</span>
+                                </div>
+                            </div>
+                        </th>
+                        <td>
+                            <div class="row">
+                                <div class="col-3 col-sm-2 d-md-none">
+                                    <span class="fs-6 fw-medium">Link</span>
+                                </div>
+                                <div class="col">
+                                    <a href="/changelog/tag/privacy"
+                                        class="fw-medium stretched-link link-underline link-underline-opacity-0 text-convrtr"
+                                        title="Changelog items tagged with privacy">
+                                        privacy
+                                    </a>
+                                    (1)
+                                </div>
+                    
+                            </div>
+                        </td>
+                        <td>
+                            <div class="row">
+                                <div class="col-3 col-sm-2 d-md-none">
+                                    Name
+                                </div>
+                                <div class="col">
+                                    Privacy
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="row">
+                                <div class="col-3 col-sm-2 d-md-none">
+                                    Description
+                                </div>
+                                <div class="col">
+                                    Anything related to privacy policy and cookies
                                 </div>
                             </div>
                         </td>
