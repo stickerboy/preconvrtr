@@ -7,7 +7,7 @@
     document.addEventListener('DOMContentLoaded', function () {
         let siteTheme = document.documentElement.getAttribute("data-bs-theme");
         if (siteTheme === "dark") {
-            cookieconsent.run({ "notice_banner_type": "headline", "consent_type": "express", "palette": "dark",  "language": "en", "page_load_consent_levels": ["strictly-necessary"], "notice_banner_reject_button_hide": false, "preferences_center_close_button_hide": false, "page_refresh_confirmation_buttons": false, "website_name": "Convrtr", "website_privacy_policy_url": "https://www.convrtr.xyz/privacy", "page_load_consent_levels": ["strictly-necessary"], "notice_banner_purposes_levels": ["strictly-necessary", "functionality", "tracking"],  "callbacks": {
+            cookieconsent.run({ "notice_banner_type": "headline", "consent_type": "express", "palette": "dark",  "language": "en", "page_load_consent_levels": ["strictly-necessary"], "notice_banner_reject_button_hide": false, "preferences_center_close_button_hide": false, "page_refresh_confirmation_buttons": false, "website_name": "PreConvrtr", "website_privacy_policy_url": "https://www.convrtr.xyz/privacy", "page_load_consent_levels": ["strictly-necessary"], "notice_banner_purposes_levels": ["strictly-necessary", "functionality", "tracking"],  "callbacks": {
                     "scripts_specific_loaded": (level) => {
                         switch (level) {
                             case 'tracking':
@@ -28,7 +28,7 @@
                 "callbacks_force": true });
 
         } else {
-            cookieconsent.run({ "notice_banner_type": "headline", "consent_type": "express", "palette": "light", "language": "en", "page_load_consent_levels": ["strictly-necessary"], "notice_banner_reject_button_hide": false, "preferences_center_close_button_hide": false, "page_refresh_confirmation_buttons": false, "website_name": "Convrtr", "website_privacy_policy_url": "https://www.convrtr.xyz/privacy",  "page_load_consent_levels": ["strictly-necessary"], "notice_banner_purposes_levels": ["strictly-necessary", "functionality", "tracking"], "callbacks": {
+            cookieconsent.run({ "notice_banner_type": "headline", "consent_type": "express", "palette": "light", "language": "en", "page_load_consent_levels": ["strictly-necessary"], "notice_banner_reject_button_hide": false, "preferences_center_close_button_hide": false, "page_refresh_confirmation_buttons": false, "website_name": "PreConvrtr", "website_privacy_policy_url": "https://www.convrtr.xyz/privacy",  "page_load_consent_levels": ["strictly-necessary"], "notice_banner_purposes_levels": ["strictly-necessary", "functionality", "tracking"], "callbacks": {
                     "scripts_specific_loaded": (level) => {
                         switch (level) {
                             case 'tracking':
@@ -85,7 +85,7 @@
         <meta property="og:description"
                 content="A simple JavaScript based tool to quickly convert text between different formats, and solve data driven puzzles using a variety of coding and decryption techniques" />
         <meta property="og:image" content="https://www.convrtr.xyz/assets/img/convrtr.jpeg" />
-        <title>Convrtr - Changelog: v1.17.3</title>
+        <title>PreConvrtr - Changelog: v1.17.3</title>
 
         <link rel="canonical" href="https://www.convrtr.xyz">
 
@@ -115,7 +115,7 @@
         <link rel="icon" type="image/png" href="/assets/favicons/favicon-32x32.png" sizes="32x32" />
         <link rel="icon" type="image/png" href="/assets/favicons/favicon-16x16.png" sizes="16x16" />
         <link rel="icon" type="image/png" href="/assets/favicons/favicon-128.png" sizes="128x128" />
-        <meta name="application-name" content="Convrtr"/>
+        <meta name="application-name" content="PreConvrtr"/>
         <meta name="msapplication-TileColor" content="#FFFFFF" />
         <meta name="msapplication-TileImage" content="/assets/favicons/mstile-144x144.png" />
         <meta name="msapplication-square70x70logo" content="/assets/favicons/mstile-70x70.png" />
@@ -135,7 +135,7 @@
             </button>
             <a href="/" 
                class="navbar-brand text-white mb-0 h1 fw-light ms-2 me-auto me-md-3 d-flex" title="Home">
-                <span>Convrtr</span>
+                <span>PreConvrtr</span>
             </a>
             <div class="d-flex ms-auto">
                 <span class="navbar-text text-white mx-0 mx-md-3 fs-5">
@@ -737,9 +737,9 @@
         </div>
         <div class="p-4 pt-2">
             <a href="/changelog"" 
-                title="Release version: v3.1.0.1" 
+                title="Release version: v3.1.0.2" 
                 class="d-inline-flex fw-semibold bg-convrtr border border-convrtr border-opacity-10 rounded-2 text-white release-version">
-                <small>v3.1.0.1</small>
+                <small>v3.1.0.2</small>
             </a>
         </div>
     </div>
