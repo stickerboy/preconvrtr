@@ -46,23 +46,29 @@ Under GDPR and the ePrivacy Directive, local storage is treated similarly to coo
 
 We ensure that local storage is used only for functionality that improves your experience and does not track or profile you.
 
-Here are the current items stored in your local storage:
-
-<div class="privacy-localstorage col-sm-12 col-md-10 col-lg-8"></div>
+<button class="btn btn-outline-convrtr" type="button" data-bs-toggle="collapse" 
+        data-bs-target="#collapsePrivacy" aria-expanded="false" aria-controls="collapsePrivacy">
+    View items stored in local storage
+</button>
+<div class="collapse col-sm-12 col-md-10 col-lg-8" id="collapsePrivacy">
+    <div class="card card-body">
+        <div class="privacy-localstorage"></div>
+    </div>
+</div>
 
 You can clear your local storage at any time to reset your preferences.
 
 ### Your Choices
 
 - You can **clear your browser’s local storage** at any time to reset your preferences.
-- You can **[opt out of Google Analytics tracking](https://support.google.com/analytics/answer/181881)** using browser extensions like Google Analytics Opt-out.
-- You can view and change **<a href="#" id="open_preferences_center" class="text-convrtr">your cookies preferences</a>**.
+- You can **[opt out of Google Analytics tracking<i class="bi bi-box-arrow-up-right opacity-75 ms-1" focusable="false" aria-hidden="false"></i>](https://support.google.com/analytics/answer/181881)** using browser extensions like Google Analytics Opt-out.
+- You can view and change **<a href="#" id="open_preferences_center" class="text-convrtr">your cookies preferences</a>** (this opens in a modal pop-up).
 
 
 ### Changes to this Privacy Policy
 
-We may update our policy from time to time, any changes will be marked on this page and available on our [Changelog](/changelog).  
-You can additionally filter down to just privacy related changes using the [Privacy tag](/changelog/tag/privacy/ "Changelog filter for privacy related updates") search.
+We may update our policy from time to time, any changes will be marked on this page and available on our **[Changelog](/changelog)**.  
+You can additionally filter down to just privacy related changes using the **[Privacy tag](/changelog/tag/privacy/ "Changelog filter for privacy related updates")** search.
 
 ### Contact
 
