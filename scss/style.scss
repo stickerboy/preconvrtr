@@ -387,6 +387,9 @@ body {
     vertical-align: -.125em;
     fill: currentcolor;
 }
+.breadcrumb .bi {
+    vertical-align: inherit;
+}
 .icon-link {
     text-decoration-color: rgba(var(--convrtr-color-link), var(--bs-link-opacity, 0.5));
     transition: text-decoration-color 0.25s ease;
@@ -399,6 +402,10 @@ body {
 .dropdown [class^="bi-"]::before, 
 .dropdown [class*=" bi-"]::before {
     vertical-align: top;
+}
+
+.bi-box-arrow-up-right::before {
+    transform: scale(0.75);
 }
 
 .mw {
