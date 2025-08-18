@@ -15,8 +15,14 @@ Object.entries(toolkit).forEach(([functionName, functionRef]) => {
  * @param {string} value - The value to be stored.
  * @returns {void}
  */
-function saveLocalStorage(key, value) {
-    return localStorage.setItem(key, value);
+function saveLocalStorage(id, name, value, description) {
+    const sectionObj = {
+        id,
+        name,
+        value,
+        description
+    };
+    localStorage.setItem(id, JSON.stringify(sectionObj));
 }
 
 /**
@@ -24,9 +30,19 @@ function saveLocalStorage(key, value) {
  * @param {string} string - The key of the item to retrieve.
  * @returns {any} - The parsed value retrieved from local storage.
  */
-function getLocalStorageItem(string) {
-    string = string.replace("\"", ""); // Remove any double quotes
-    return JSON.parse(localStorage.getItem(string));
+function getLocalStorageItem(id) {
+    const raw = localStorage.getItem(id);
+    if (!raw) { return false };
+
+    try {
+        const parsed = JSON.parse(raw);
+        if (typeof parsed === "object" && parsed !== null && "value" in parsed) {
+            return parsed.value;
+        }
+        return false;
+    } catch {
+        return false;
+    }
 }
 
 /**
@@ -153,10 +169,7 @@ function download(filename, text) {
     document.body.removeChild(e);
 }
 
-/**
- * Restores toggle states from local storage
- * @returns {void}
- */
+
 const sectionToggles = Array.from(document.getElementsByClassName("section-toggle"))
     .filter(sectionToggle => !sectionToggle.classList.contains("d-none"));
 if (sectionToggles.length > 0) {
@@ -165,29 +178,46 @@ if (sectionToggles.length > 0) {
             for (const sectionToggle of sectionToggles) {
                 const section = sectionToggle.closest(".section");
                 if (!section) {
-                    console.warn("No parent section found for:", sectionToggle);
+                    console.warn("No parent section found for: ", sectionToggle);
                     continue; // Skip this iteration if no parent section exists
                 }
 
                 const sectionID = section.id;
-                const x = getLocalStorageItem(sectionID);
+                const isExpanded = getLocalStorageItem(sectionID) === "true";
 
-                if (x !== null) {
-                    sectionToggle.setAttribute("aria-expanded", x);
-                }
+                sectionToggle.setAttribute("aria-expanded", isExpanded);
 
-                // Use the href attribute to locate the collapse element
                 const collapseID = sectionToggle.getAttribute("href");
                 const collapseElement = document.querySelector(collapseID);
+                const collapseToggle = sectionToggle.querySelector(".toggle-button");
+                const tooltipInstance = bootstrap.Tooltip.getInstance(collapseToggle);
 
                 if (collapseElement) {
-                    if (x === true) {
+                    // collapseElement.classList.toggle("show", isExpanded === true);
+                    if (isExpanded === true) {
                         collapseElement.classList.add("show");
+
+                        if (tooltipInstance) {
+                            collapseToggle.setAttribute("data-bs-original-title", "Collapse section");
+                            tooltipInstance.setContent({ '.tooltip-inner': "Collapse section" });
+                        } else {
+                            // If tooltip hasn't been initialized yet, initialize it
+                            new bootstrap.Tooltip(collapseToggle);
+                        }
+
                     } else {
                         collapseElement.classList.remove("show");
+
+                        if (tooltipInstance) {
+                            collapseToggle.setAttribute("data-bs-original-title", "Expand section");
+                            tooltipInstance.setContent({ '.tooltip-inner': "Expand section" });
+                        } else {
+                            // If tooltip hasn't been initialized yet, initialize it
+                            new bootstrap.Tooltip(collapseToggle);
+                        }
                     }
                 } else {
-                    console.warn("No collapse element found for ID:", collapseID);
+                    console.warn("No collapse element found for ID: ", collapseID);
                 }
             }
         }
@@ -197,8 +227,32 @@ if (sectionToggles.length > 0) {
 
     // Save toggle state
     Array.from(sectionToggles, c => c.addEventListener("click", function () {
-        let section = c.closest(".section");
-        saveLocalStorage(section.id, c.getAttribute("aria-expanded"));
+        const section = c.closest(".section");
+        const sectionID = section.id;
+        const isExpanded = c.getAttribute("aria-expanded");
+        const name = c.getAttribute("data-section-name").charAt(0).toUpperCase() + c.getAttribute("data-section-name").slice(1) || `${sectionID.charAt(0).toUpperCase() + sectionID.slice(1)}`;
+        const description = c.getAttribute("data-section-description") || "Stores expanded/collapsed state of a section";
+
+        const collapseToggle = c.querySelector(".toggle-button");
+        const tooltipInstance = bootstrap.Tooltip.getInstance(collapseToggle);
+        if (isExpanded === "true") {
+            if (tooltipInstance) {
+                collapseToggle.setAttribute("data-bs-original-title", "Collapse section");
+                tooltipInstance.setContent({ '.tooltip-inner': "Collapse section" });
+            } else {
+                // If tooltip hasn't been initialized yet, initialize it
+                new bootstrap.Tooltip(collapseToggle);
+            }
+        } else {
+            if (tooltipInstance) {
+                collapseToggle.setAttribute("data-bs-original-title", "Expand section");
+                tooltipInstance.setContent({ '.tooltip-inner': "Expand section" });
+            } else {
+                // If tooltip hasn't been initialized yet, initialize it
+                new bootstrap.Tooltip(collapseToggle);
+            }
+        }
+        saveLocalStorage(sectionID, name, isExpanded, description);
     }));
 }
 
@@ -214,10 +268,6 @@ const dropdownList = [...dropdownElementList].map(dropdownToggleEl => new bootst
 const popoverTriggerList = document.querySelectorAll("[data-bs-toggle=\"popover\"]");
 const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
 const textareas = document.querySelectorAll(".form-control, .data-to-copy");
-
-// Enable collapse
-// const collapseElementList = document.querySelectorAll('.collapse');
-// const collapseList = [...collapseElementList].map(collapseEl => new bootstrap.Collapse(collapseEl));
 
 const resetButtons = document.querySelectorAll(".btn-reset-data");
 
