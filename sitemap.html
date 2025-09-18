@@ -3,6 +3,7 @@ layout: layout.liquid
 title: Sitemap
 description: An overview of all pages available across the site
 page-id: sitemap
+eleventyExcludeFromCollections: true
 ---
 
 <section id="sitemap" class="section">
@@ -10,11 +11,12 @@ page-id: sitemap
         <div class="section-heading mb-4">
             <div class="row" style="--bs-gutter-y:1.5rem;" data-masonry='{"percentPosition": true }'>
                 {% for nav-item in nav %}
+                {% if nav-item.exclude-from-sitemap == false %}
                 <div class="col-12 col-md-6 col-lg-4 col-hd-3 col-hd-3 col-fhd-3">
                     <div class="card">
                         <div class="card-header">
-                            <h2 class="card-title h5 mb-0 mt-2">
-                                <a class="link-body-emphasis link-underline link-underline-opacity-0" href="{{ '/' | append: nav-item.id | replace: 'text', '' | url }}">
+                            <h2 class="card-title h5 position-relative mb-0 mt-2">
+                                <a class="stretched-link link-underline link-underline-opacity-0 text-convrtr-link" href="{{ '/' | append: nav-item.id | replace: 'text', '' | url }}">
                                     {{ nav-item.label }}
                                 </a>
                             </h2>
@@ -28,6 +30,7 @@ page-id: sitemap
                         </div>
                     </div>
                 </div>
+                {% endif %}
                 {% endfor %}
             </div>
         </div>

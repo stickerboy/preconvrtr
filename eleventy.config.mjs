@@ -20,7 +20,7 @@ export default function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy("assets/fonts/*");
     eleventyConfig.addPassthroughCopy("assets/js/**/*.js");
     eleventyConfig.addPassthroughCopy("assets/js/**/*.mjs");
-    eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
+    eleventyConfig.addShortcode("year", () => `2013 &mdash; ${new Date().getFullYear()}`);
     eleventyConfig.addFilter("fileExists", (filePath) => {
         const fullPath = path.join("_includes", filePath);
         return fs.existsSync(fullPath);
@@ -53,7 +53,11 @@ export default function (eleventyConfig) {
         return content; // Return the content as-is
     });
 
-    // Only allow certian tags within changelogs
+    eleventyConfig.addFilter('dateISO', function (date) {
+        return new Date(date).toISOString();
+    });
+
+    // Only allow certain tags within changelogs
     const allowedTags = allowedTagsData.labels;
     const allowedTagKeys = allowedTags.map((tag) => tag.key); 
 
@@ -201,6 +205,13 @@ export default function (eleventyConfig) {
                 return data.page.fileSlug;
             }
             return null;
+        },
+        "lastmod": (data) => {
+            if (data.page && data.page.inputPath) {
+                const filePath = path.join(process.cwd(), data.page.inputPath);
+                const stats = fs.statSync(filePath);
+                return stats.mtime; // Return the last modified time of the file
+            }
         },
     });
 
