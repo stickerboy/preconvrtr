@@ -10,8 +10,6 @@
 @import "../node_modules/bootstrap-scss/mixins";
 @import "../node_modules/bootstrap-scss/utilities";
 @import "../node_modules/bootstrap-scss/root";
-@import "../node_modules/bootstrap-scss/grid";
-@import "../node_modules/bootstrap-scss/list-group";
 
 // Helpers
 @import "../node_modules/bootstrap-scss/helpers";
@@ -47,6 +45,7 @@
     --convrtr-bg-color-10: #0f735f;
     --convrtr-bg-color-20: #0e6655;
     --convrtr-bg-color-25: #11806a40;
+    --convrtr-color-25: #c3dfda;
     --convrtr-bg-color-25-rgb: rgba(17, 128, 106, 0.25);
     --convrtr-bg-color-50-rgb: rgba(17, 128, 106, 0.5);
     --convrtr-bg-color-75-rgb: rgba(17, 128, 106, 0.75);
@@ -125,6 +124,7 @@ body {
 }
 @include color-mode(dark) {
     .page-wrap {
+        background-color: var(--convrtr-bg-dark);
         &-404 {
             background-color: var(--convrtr-bg-dark) !important;
         }
@@ -443,7 +443,7 @@ body {
 
     &-text {
         display: none;
-        @media (min-width: 640px) {
+        @media (min-width: 672px) {
             display: block;
         }
     }
@@ -951,6 +951,16 @@ textarea.form-control.is-invalid.ld-warning {
     font-weight: normal;
 }
 
+mark {
+    background-color: var(--convrtr-color-25);
+    border-radius: var(--bs-border-radius-sm);
+}
+@include color-mode(dark) {
+    mark {
+        background-color: var(--convrtr-bg-color);
+    }
+}
+
 .changelog {
     h1,h2 {
         padding-bottom: 0.75rem;
@@ -978,19 +988,6 @@ textarea.form-control.is-invalid.ld-warning {
         @extend .h5 !optional;
         font-weight: 400;
     }
-    article img {
-        height: auto;
-        max-width: 100%;
-        @media (min-width: map-get($grid-breakpoints, md)) {
-            max-width: 95%;
-        }
-        @media (min-width: map-get($grid-breakpoints, lg)) {
-            max-width: 85%;
-        }
-        @media (min-width: map-get($grid-breakpoints, xl)) {
-            max-width: 75%;
-        }
-    }
     a > img {
         max-width: 100%;
         padding: 0.5rem;
@@ -1003,6 +1000,19 @@ textarea.form-control.is-invalid.ld-warning {
         &:active,
         &:focus {
             outline-color: var(--convrtr-bg-color-75)
+        }
+    }
+    article img {
+        height: auto;
+        max-width: 100%;
+        @media (min-width: map-get($grid-breakpoints, md)) {
+            max-width: 95%;
+        }
+        @media (min-width: map-get($grid-breakpoints, lg)) {
+            max-width: 85%;
+        }
+        @media (min-width: map-get($grid-breakpoints, xl)) {
+            max-width: 75%;
         }
     }
     code {
@@ -1240,19 +1250,19 @@ button.cc-nb-changep {
 }
 
 .hidden {
-    @extend .d-none;
+    @extend .d-none !optional;
 }
 
 .pagefind-ui__form {
-    @extend .input-group;
-    @extend .mb-3;
+    @extend .input-group !optional;
+    @extend .mb-3 !optional;
 
     .pagefind-ui__search-input {
-        @extend .form-control;
+        @extend .form-control !optional;
     }
 
     .pagefind-ui__search-clear {
-        @extend .btn;
+        @extend .btn !optional;
         @extend .btn-convrtr !optional;
         --bs-btn-border-radius: .5rem;
         border-top-right-radius: var(--bs-btn-border-radius) !important;
@@ -1260,37 +1270,38 @@ button.cc-nb-changep {
     }
 }
 .pagefind-ui__drawer {
-    @extend .w-100;
-    @extend .row;
+    @extend .w-100 !optional;
+    @extend .row !optional;
     margin-top: 1rem;
 }
 .pagefind-ui__message {
-    @extend .px-2;
+    @extend .px-2 !optional;
 }
 .pagefind-ui__results {
-    @extend .list-group;
-    @extend .list-group-flush;
+    @extend .list-group !optional;
+    @extend .list-group-flush !optional;
 }
 .pagefind-ui__result {
-    @extend .list-group-item;
-    @extend .list-group-item-action;
+    @extend .list-group-item !optional;
+    @extend .list-group-item-action !optional;
+    text-align: start;
 }
 .pagefind-ui__result-link {
     --bs-link-underline-opacity: 0;
-    @extend .text-convrtr-link;
+    @extend .text-convrtr-link !optional;
     font-weight: 500 !important;
     font-size: 1.15rem;
     text-decoration-color: rgba(var(--bs-link-color-rgb), var(--bs-link-underline-opacity, 1)) !important;
-    @extend .stretched-link;
+    @extend .stretched-link !optional;
 }
 .pagefind-ui__button {
     margin-top: 1rem;
-    @extend .btn;
-    @extend .btn-outline-convrtr;
+    @extend .btn !optional;
+    @extend .btn-outline-convrtr !optional;
 }
 .pagefind-ui__filter-panel,
 .pagefind-ui__results-area {
-    @extend .col-12;
+    @extend .col-12 !optional;
     padding: 0 !important;
 }
 @media (min-width:869px) {
@@ -1315,16 +1326,20 @@ button.cc-nb-changep {
     }
 }
 .pagefind-ui__filter-group {
-    @extend .list-group;
+    @extend .list-group !optional;
 }
 .pagefind-ui__filter-value {
-    @extend .list-group-item;
-    @extend .list-group-item-action;
+    @extend .list-group-item !optional;
+    @extend .list-group-item-action !optional;
     padding: 0;
 }
 .pagefind-ui__filter-name {
     font-size: 1.5rem;
     text-align: start;
+    position: relative;
+}
+.pagefind-ui__filter-block summary {
+    margin-bottom: 0.5rem;
 }
 .pagefind-ui__filter-block summary::-webkit-details-marker,
 .pagefind-ui__filter-block summary::marker {
@@ -1344,7 +1359,7 @@ button.cc-nb-changep {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     padding: 0.25rem;
-    margin-right: 0.25rem;
+    margin-right: 0.5rem;
     --bs-bg-opacity: 1;
     background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
     --bs-border-opacity: 1;
@@ -1367,8 +1382,8 @@ button.cc-nb-changep {
     color: var(--bs-white);
     z-index: 5;
     position: absolute;
-    left: 0.25rem;
-    top: 4.65rem;
+    left: 0.3rem;
+    top: 0.8rem;
     transform: rotate(0deg);
     transition: transform .4s ease-in-out;
 }
