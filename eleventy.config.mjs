@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import matter from "gray-matter";
+import { execSync } from 'child_process';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -53,7 +54,11 @@ export default function (eleventyConfig) {
         return content; // Return the content as-is
     });
 
-    // Only allow certian tags within changelogs
+    eleventyConfig.addFilter('dateISO', function (date) {
+        return new Date(date).toISOString();
+    });
+
+    // Only allow certain tags within changelogs
     const allowedTags = allowedTagsData.labels;
     const allowedTagKeys = allowedTags.map((tag) => tag.key); 
 
@@ -231,5 +236,13 @@ export default function (eleventyConfig) {
         const uniqueFilteredTags = [...new Set(allTags.filter((tag) => allowedTagKeys.includes(tag)))];
 
         return uniqueFilteredTags;
+    });
+
+    eleventyConfig.on("eleventy.after", () => {
+        try {
+            execSync('npx pagefind --site _site --glob "**/*.html"', { stdio: 'inherit', encoding: 'utf-8' });
+        } catch (err) {
+            console.error('Pagefind generation failed:', err);
+        }
     });
 }

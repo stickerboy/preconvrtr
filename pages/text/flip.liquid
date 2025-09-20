@@ -1,6 +1,7 @@
 ---
 layout: layout.liquid
 title: Flip text
+tags: tools
 ---
 {% assign filename = page.fileSlug %}
 <section id="{{ filename }}" class="section">
@@ -8,7 +9,8 @@ title: Flip text
         <a class="d-flex justify-content-between section-toggle text-decoration-none d-none pt-4 pb-3 px-2 px-sm-4"
             data-bs-toggle="collapse" href="#{{ filename }}Collapse" role="button" aria-expanded="true"
             aria-controls="{{ filename }}Collapse" data-section-name="{{ filename }}"
-            data-section-description="Toggle visibility of {{ filename }} section">
+            data-section-description="Toggle visibility of {{ filename }} section"
+            data-pagefind-ignore="all">
             <h2 class="display-6 w-100 d-flex m-0">
                 {{ filename | upperFirst }} text
             </h2>
@@ -18,7 +20,7 @@ title: Flip text
         </a>
         <hr class="d-none my-0 mx-4">
         <div class="section-description py-3 px-2 px-sm-4">
-            <p>
+            <p class="px-2">
                 Flip text upside down - allows you to turn <code class="d-inline-flex px-2 bg-success bg-opacity-10 border border-success border-opacity-10 rounded-2">this</code> into <code class="d-inline-flex px-2 bg-success bg-opacity-10 border border-success border-opacity-10 rounded-2">ʇɥıs</code>
             </p>
         </div>
@@ -29,14 +31,14 @@ title: Flip text
                 <span class="card-label visually-hidden">Flip Text</span>
                 <div class="card-body text-center">
                     <label for="{{ filename }}Text" class="visually-hidden">Flip text upside down</label>
-                    <textarea placeholder="Example: Hello → Hǝןןo" rows="6" id="{{ filename }}Text" class="form-control {{ filename }}-text" autocomplete="off"></textarea>
+                    <textarea placeholder="Example: Hello &srarr; Hǝןןo" rows="6" id="{{ filename }}Text" class="form-control {{ filename }}-text" autocomplete="off"></textarea>
                 </div>
                 <div class="card-footer py-3">
                     <div class="d-flex justify-content-start align-items-center">
                         <button type="button" class="btn btn-md btn-convrtr" id="{{ filename }}Decode" title="Flip text upside down">{{ filename | upperFirst }}</button>
                         <div class="form-check form-switch mx-2">
-                            <input class="form-check-input" type="checkbox" role="switch" id="{{ filename }}Direction" aria-checked="false">
-                            <label class="form-check-label" for="{{ filename }}Direction">Reverse</label>
+                            <input class="form-check-input" type="checkbox" role="switch" id="{{ filename }}Direction" aria-checked="false" aria-labelledby="{{ filename }}DirectionLabel">
+                            <label class="form-check-label" id="{{ filename }}DirectionLabel" for="{{ filename }}Direction">Reverse</label>
                         </div>
                         {% include "components/select-copy-dl" %}
                     </div>
