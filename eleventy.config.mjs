@@ -78,6 +78,7 @@ export default function (eleventyConfig) {
             };
         });
     });
+
     eleventyConfig.addFilter("upperFirst", (filename) => {
         const lowerCased = filename.toLowerCase();
         return `${lowerCased.charAt(0).toUpperCase() + lowerCased.slice(1)}`;
