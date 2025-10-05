@@ -92,6 +92,25 @@ body {
         background-color: #2e3236 !important;
     }
 }
+
+::selection {
+    background-color: var(--convrtr-bg-color);
+    color: white;
+}
+::-moz-selection {
+    background-color: var(--convrtr-bg-color);
+    color: white;
+}
+@include color-mode(dark) {
+    ::selection {
+        background-color: var(--convrtr-bg-color-10);
+        color: white;
+    }
+    ::-moz-selection {
+        background-color: var(--convrtr-bg-color-1-);
+        color: white;
+    }
+}
 .page-wrap {
     grid-column-start: 2;
     position: relative;
@@ -1015,6 +1034,10 @@ mark {
             max-width: 75%;
         }
     }
+    pre {
+        font-size: inherit;
+        user-select: all;
+    }
     code {
         --bs-bg-opacity: 0.1;
         --bs-border-opacity: 0.1;
@@ -1034,6 +1057,25 @@ mark {
     }
     summary {
         margin-bottom: 0.5rem;
+        position: relative;
+        
+        &::marker {
+            display: none;
+            content: "";
+        }
+    }
+    blockquote {
+        padding-left: 1rem;
+        margin-left: 1rem;
+        border-left: 0.25rem solid var(--convrtr-bg-color-50);
+    }
+    &.license {
+        blockquote {
+            margin-left: 0;
+        }
+    }
+    .pagination .btn {
+        font-size: var(--bs-pagination-font-size);
     }
 }
 
@@ -1346,6 +1388,7 @@ button.cc-nb-changep {
     display: none;
     content: "";
 }
+.changelog summary::before,
 .pagefind-ui__filter-block summary::before {
     content: "\f148";
     display: inline-block;
@@ -1367,6 +1410,7 @@ button.cc-nb-changep {
     border-radius: var(--bs-border-radius) !important;
     color: var(--bs-dark-rgb);
 }
+.changelog summary::after,
 .pagefind-ui__filter-block summary::after {
     content: "\f148";
     display: inline-block;
@@ -1387,6 +1431,10 @@ button.cc-nb-changep {
     transform: rotate(0deg);
     transition: transform .4s ease-in-out;
 }
+.changelog summary::after {
+    top: 0.35rem;
+}
+.changelog details[open] summary::after,
 .pagefind-ui__filter-block[open] summary::after {
     transform: rotate(90deg);
 }

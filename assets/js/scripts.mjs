@@ -150,18 +150,17 @@ export function emptyContainerCheck(data, container, error) {
 function selectAllText(element, trim = false) {
     if (element.localName === "textarea") {
         element.focus();
-        if(trim) {
-            element.value = element.value.trim(); // Trim the value if needed
+        if (trim) {
+            element.value = element.value.trim();
         }
         element.setSelectionRange(0, element.value.length);
     } else {
-        if (trim) {
-            element.textContent = element.textContent.trim(); // Trim the text content if needed
-        }
-        window.getSelection()
-            .selectAllChildren(
-                element
-            );
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+
+        const range = document.createRange();
+        range.selectNodeContents(element);
+        selection.addRange(range);
     }
 }
 
@@ -373,7 +372,7 @@ if (selectButtons.length > 0) {
             tooltip.setContent({ ".tooltip-inner": "Select All" });
         }, 3430);
 
-        selectAllText(textarea, true);
+        selectAllText(textarea, false);
     }));
 }
 
@@ -479,6 +478,8 @@ customSwitch && customSwitch.addEventListener('click', () => {
 
 const navToggle = document.querySelector("#navbar-toggler");
 const navGrid = document.querySelector(".sidebar-grid");
+const navGridtooltips = document.querySelectorAll(`.sidebar-grid [data-bs-toggle="tooltip"]`);
+const navGridtooltipInstances = [...navGridtooltips].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 
 if (navToggle && navGrid) {
     navToggle.addEventListener("click", () => {
@@ -486,6 +487,10 @@ if (navToggle && navGrid) {
 
         if (!isOpen) {
             navGrid.classList.add("open");
+
+            navGridtooltipInstances.forEach(tooltip => {
+                tooltip.disable(); // Enable tooltips
+            });
 
             // Find the active page and its associated dropdown
             const activeItem = navGrid.querySelector(".sidebar-item.active");
@@ -502,6 +507,11 @@ if (navToggle && navGrid) {
                 dropdownToggle.setAttribute("tabindex", 0);
             });
         } else {
+            // Disable tooltips when sidebar is closed
+            navGridtooltipInstances.forEach(tooltip => {
+                tooltip.enable(); // Disable tooltips
+            });
+
             // Close all open sidebar collapse sections
             const openCollapses = navGrid.querySelectorAll(".sidebar-dropdown .collapse.show");
             openCollapses.forEach(collapse => {
