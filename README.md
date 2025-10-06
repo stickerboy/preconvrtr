@@ -1,4 +1,4 @@
-# Convrtr
+# PreConvrtr
 For everlost and Grollow!
 
 Convrtr is a simple JavaScript based tool to quickly convert text between different formats. Started out life as a series of small PHP based scripts to help solve ARG related data-driven puzzles, which eventually made its way to a microsite for working on the go. I decided to migrate to JavaScript so I could host on GitHub and not need a dedicated host, easier to run offline as well.
